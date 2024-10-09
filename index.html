@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mosphere - AI Dance Music Creation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Press Start 2P', cursive;
+            line-height: 1.8; /* 增加行高 */
+            margin: 0;
+            padding: 0;
+            color: #ffffff;
+            font-size: 14px; /* 增加基础字体大小 */
+        }
+        .background-container {
+            position: relative;
+            min-height: 100vh;
+            background-image: url('images/pathtoyourimage.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8); /* 增加背景不透明度 */
+        }
+        header {
+            text-align: center;
+            padding: 20px 0;
+        }
+        h1 {
+            color: #8a2be2;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+        nav ul li a {
+            color: #8a2be2;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        section {
+            background-color: rgba(0, 0, 0, 0.6); /* 调整部分背景透明度 */
+            padding: 25px; /* 增加内边距 */
+            margin-bottom: 40px;
+            border-radius: 10px;
+        }
+        h2 {
+            color: #8a2be2;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+        ul li {
+            margin-bottom: 10px;
+        }
+        form input, form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background-color: #333;
+            border: none;
+            color: #fff;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+        }
+        form button {
+            background-color: #8a2be2;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 12px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        /* 添加新的样式 */
+        #vision {
+            text-align: justify;
+            line-height: 1.8;
+            padding: 30px;
+            background-color: rgba(0, 0, 0, 0.7);
+            margin-bottom: 40px;
+        }
+        #vision h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #8a2be2;
+        }
+        #vision p {
+            font-size: 12px; /* 增加 vision 部分的字体大小 */
+            margin-bottom: 20px; /* 增加段落间距 */
+            font-size: 10px;
+        }
+        
+        /* 添加新的样式 */
+        .quote-banner {
+            background-color: rgba(138, 43, 226, 0.5);
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 10px;
+            line-height: 1.4;
+        }
+        .quote-banner p {
+            margin: 0;
+        }
+        .quote-banner .author {
+            font-size: 8px;
+            margin-top: 5px;
+        }
+        
+        /* 为 Join Us 部分添加新样式 */
+        #join-us {
+            background-color: rgba(138, 43, 226, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+        #join-us h2 {
+            color: #8a2be2;
+            text-align: center;
+        }
+        #join-us ul {
+            padding-left: 0;
+        }
+        #join-us li {
+            margin-bottom: 10px;
+            list-style-type: none;
+        }
+
+        /* 添加响应式设计 */
+        @media (max-width: 768px) {
+            body {
+                font-size: 12px;
+            }
+            .content-wrapper {
+                padding: 10px;
+            }
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.2em;
+            }
+            nav ul li {
+                display: block;
+                margin: 10px 0;
+            }
+            #vision p {
+                font-size: 10px;
+            }
+            .quote-banner {
+                font-size: 10px;
+            }
+            .quote-banner .author {
+                font-size: 8px;
+            }
+            form input, form textarea, form button {
+                font-size: 10px;
+            }
+        }
+
+        /* 添加汉堡菜单样式 */
+        .menu-toggle {
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            nav ul {
+                display: none;
+            }
+            nav ul.show {
+                display: block;
+            }
+        }
+
+        /* 添加音乐控制按钮的样式 */
+        #music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(138, 43, 226, 0.7);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 20px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <audio id="background-music" loop>
+        <source src="Jump Around（1）.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <button id="music-control">🎵</button>
+
+    <div class="quote-banner">
+        <p>"Music is the universal language of mankind."</p>
+        <p class="author">― Henry Wadsworth Longfellow</p>
+    </div>
+    <div class="background-container">
+        <div class="content-wrapper">
+            <section id="vision">
+                <h2>Our Vision</h2>
+                <p>Less is more. Never forget the original intention. At first, our vision was to create a service system that empowers offline entertainment scenarios with technological AI means.</p>
+                <p>As we delved deeper into AI music, we found that the music styles we can cover are not limited to the entertainment industry. We can even venture into practical fields in daily life. However, it is easy to make mistakes if we think too easily.</p>
+                <p>Recently, after discussions with the Xiaobing AI team in China and doctoral classmates from Carnegie Mellon University, we reached new conclusions and carefully thought and summarized what we should do and what we can do.</p>
+                <p>For AI, what matters is the quality of the data set rather than relying solely on quantity stacking. If we want Mosphere to become a product with a strong sense of art and rich musical content, then in the early stage, we must focus on a single music style and conduct a large amount of in-depth work. This is undoubtedly what we are good at and willing to do. After all, this is our original intention.</p>
+                <p>The learning in these few days has transformed my thinking from creating music suitable for the current scene according to different atmospheres to focusing on creating dance music and hip-hop music needed in the entertainment atmosphere. This makes me extremely excited. It seems that I quickly turn around on the wrong path and find my original direction when I look back.</p>
+                <p>An entertainment market is indeed large enough. Providing happiness to consumers is indeed extremely important.</p>
+            </section>
+            <header>
+                <h1>Mosphere</h1>
+                <div class="menu-toggle">☰</div>
+                <nav>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#ai-assistant">AI Assistant</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+            </header>
+
+            <main>
+                <section id="intro">
+                    <h2>AI-Powered Dance Music</h2>
+                    <p>Create stunning tracks with AI</p>
+                </section>
+
+                <section id="features">
+                    <h2>Features</h2>
+                    <ul>
+                        <li>AI Rhythm Generation</li>
+                        <li>Melody Creation</li>
+                        <li>Auto Mixing & Mastering</li>
+                        <li>Style Fusion</li>
+                    </ul>
+                </section>
+
+                <section id="about">
+                    <h2>About Us</h2>
+                    <p>Revolutionizing music with AI</p>
+                </section>
+
+                <section id="contact">
+                    <h2>Contact</h2>
+                    <form>
+                        <input type="text" placeholder="Name" required>
+                        <input type="email" placeholder="Email" required>
+                        <textarea placeholder="Message" required></textarea>
+                        <button type="submit">Send</button>
+                    </form>
+                </section>
+
+                <!-- 添加新的 Join Us 部分 -->
+                <section id="join-us">
+                    <h2>Join Us</h2>
+                    <p>The team we need in the early stage includes:</p>
+                    <ul>
+                        <li>One full-stack engineer</li>
+                        <li>One front-end developer</li>
+                        <li>One back-end developer</li>
+                        <li>One AI deep learning engineer who can assist remotely</li>
+                        <li>Two excellent music producers</li>
+                    </ul>
+                </section>
+
+                <!-- 保持其他部分不变 -->
+            </main>
+
+            <footer>
+                <p>&copy; 2023 Mosphere. All rights reserved.</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        // 添加汉堡菜单功能
+        document.querySelector('.menu-toggle').addEventListener('click', function() {
+            document.querySelector('nav ul').classList.toggle('show');
+        });
+
+        // 添加音乐控制功能
+        const music = document.getElementById('background-music');
+        const musicControl = document.getElementById('music-control');
+        let isMusicPlaying = false;
+
+        musicControl.addEventListener('click', function() {
+            if (isMusicPlaying) {
+                music.pause();
+                musicControl.textContent = '🎵';
+            } else {
+                music.play();
+                musicControl.textContent = '⏸';
+            }
+            isMusicPlaying = !isMusicPlaying;
+        });
+    </script>
+</body>
+</html>

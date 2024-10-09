@@ -1,0 +1,147 @@
+/* 基本样式重置和全局设置 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Press Start 2P', cursive;
+    color: #fff;
+    background-color: #000;
+    height: 100%;
+}
+
+.background-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('path/to/your/image.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+.background-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5); /* 黑色遮罩，50%透明度 */
+    z-index: -1;
+}
+
+.content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+header {
+    text-align: center;
+    padding: 20px 0;
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    color: #ff00ff;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: #00ffff;
+    text-decoration: none;
+}
+
+main section {
+    margin-bottom: 40px;
+}
+
+h2 {
+    color: #ff00ff;
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 10px;
+}
+
+.chat-container {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 2px solid #00ffff;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.chat-messages {
+    height: 200px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+}
+
+.chat-input input {
+    width: 70%;
+    padding: 10px;
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #00ffff;
+}
+
+.chat-input button, form button {
+    padding: 10px 20px;
+    background-color: #ff00ff;
+    color: #000;
+    border: none;
+    cursor: pointer;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #00ffff;
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    color: #00ffff;
+}
+
+/* 确保其他内容在背景之上 */
+body > *:not(.background-container) {
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    .background-container {
+        background-position: left center;
+    }
+}
